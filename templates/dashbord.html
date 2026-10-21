@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>LabSlot - Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            LabSlot
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Dashboard
+            </a>
+
+            <a href="/book">
+                Book Lab
+            </a>
+
+            <a href="/bookings">
+                All Bookings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+
+        <div class="page-title">
+
+            <h1>
+                LabSlot Dashboard
+            </h1>
+
+            <p>
+                Computer laboratory booking management system.
+            </p>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>
+                    Total Active Bookings
+                </h3>
+
+                <div class="card-number">
+
+                    {{ total_bookings }}
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>
+                    Today's Bookings
+                </h3>
+
+                <div class="card-number">
+
+                    {{ today_bookings }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAB BOOKINGS -->
+
+        <div class="lab-list">
+
+            <h2>
+                Bookings Per Lab
+            </h2>
+
+            <br>
+
+
+            {% for lab in lab_counts %}
+
+                <div class="lab-row">
+
+                    <span>
+                        {{ lab["lab_name"] }}
+                    </span>
+
+                    <span class="lab-count">
+                        {{ lab["count"] }} bookings
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <br>
+
+
+        <a
+            href="/book"
+            class="btn"
+        >
+            + Book a Lab
+        </a>
+
+
+        <a
+            href="/bookings"
+            class="btn"
+        >
+            View All Bookings
+        </a>
+
+
+    </div>
+
+</body>
+
+</html>

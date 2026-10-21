@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>LabSlot - Book Lab</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            LabSlot
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Dashboard
+            </a>
+
+            <a href="/book">
+                Book Lab
+            </a>
+
+            <a href="/bookings">
+                All Bookings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <div class="page-title">
+
+            <h1>Book a Computer Lab</h1>
+
+            <p>
+                Reserve a laboratory for your class or practical.
+            </p>
+
+        </div>
+
+
+        <div class="form-card">
+
+            <form method="POST" action="/book">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Faculty Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="faculty_name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Lab
+                    </label>
+
+                    <select name="lab_name" required>
+
+                        <option value="">
+                            Select Lab
+                        </option>
+
+                        <option value="Lab 1">Lab 1</option>
+                        <option value="Lab 2">Lab 2</option>
+                        <option value="Lab 3">Lab 3</option>
+                        <option value="Lab 4">Lab 4</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Booking Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="booking_date"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Time Slot
+                    </label>
+
+                    <select name="time_slot" required>
+
+                        <option value="">
+                            Select Time Slot
+                        </option>
+
+                        <option value="9-11">
+                            9:00 AM - 11:00 AM
+                        </option>
+
+                        <option value="11-1">
+                            11:00 AM - 1:00 PM
+                        </option>
+
+                        <option value="2-4">
+                            2:00 PM - 4:00 PM
+                        </option>
+
+                        <option value="4-6">
+                            4:00 PM - 6:00 PM
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Purpose
+                    </label>
+
+                    <textarea
+                        name="purpose"
+                        rows="4"
+                        minlength="5"
+                        maxlength="100"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Number of Students
+                    </label>
+
+                    <input
+                        type="number"
+                        name="student_count"
+                        min="1"
+                        max="60"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Book Lab
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

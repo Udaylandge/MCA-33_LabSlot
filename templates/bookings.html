@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>LabSlot - All Bookings</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            LabSlot
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Dashboard
+            </a>
+
+            <a href="/book">
+                Book Lab
+            </a>
+
+            <a href="/bookings">
+                All Bookings
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="container">
+
+        <div class="page-title">
+
+            <h1>All Bookings</h1>
+
+            <p>
+                View and manage laboratory bookings.
+            </p>
+
+        </div>
+
+
+        <!-- FILTER -->
+
+        <div class="filter-card">
+
+            <form
+                method="GET"
+                action="/bookings"
+                class="filter-form"
+            >
+
+                <div>
+
+                    <label>
+                        Lab
+                    </label>
+
+                    <select name="lab">
+
+                        <option value="">
+                            All Labs
+                        </option>
+
+                        <option value="Lab 1"
+                            {% if selected_lab == "Lab 1" %}
+                            selected
+                            {% endif %}>
+                            Lab 1
+                        </option>
+
+                        <option value="Lab 2"
+                            {% if selected_lab == "Lab 2" %}
+                            selected
+                            {% endif %}>
+                            Lab 2
+                        </option>
+
+                        <option value="Lab 3"
+                            {% if selected_lab == "Lab 3" %}
+                            selected
+                            {% endif %}>
+                            Lab 3
+                        </option>
+
+                        <option value="Lab 4"
+                            {% if selected_lab == "Lab 4" %}
+                            selected
+                            {% endif %}>
+                            Lab 4
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+
+                    <label>
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="date"
+                        value="{{ selected_date }}"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Filter
+                </button>
+
+
+                <a
+                    href="/bookings"
+                    class="btn"
+                >
+                    Clear
+                </a>
+
+            </form>
+
+        </div>
+
+
+        <!-- BOOKINGS TABLE -->
+
+        <div class="table-container">
+
+            {% if bookings %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Faculty</th>
+
+                        <th>Lab</th>
+
+                        <th>Date</th>
+
+                        <th>Time</th>
+
+                        <th>Purpose</th>
+
+                        <th>Students</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for booking in bookings %}
+
+                    <tr>
+
+                        <td>
+                            {{ booking["booking_id"] }}
+                        </td>
+
+                        <td>
+                            {{ booking["faculty_name"] }}
+                        </td>
+
+                        <td>
+                            {{ booking["lab_name"] }}
+                        </td>
+
+                        <td>
+                            {{ booking["booking_date"] }}
+                        </td>
+
+                        <td>
+                            {{ booking["time_slot"] }}
+                        </td>
+
+                        <td>
+                            {{ booking["purpose"] }}
+                        </td>
+
+                        <td>
+                            {{ booking["student_count"] }}
+                        </td>
+
+
+                        <td>
+
+                            {% if booking["status"] == "Booked" %}
+
+                                <span class="status-booked">
+                                    Booked
+                                </span>
+
+                            {% else %}
+
+                                <span class="status-cancelled">
+                                    Cancelled
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if booking["status"] == "Booked" %}
+
+                                <form
+                                    method="POST"
+                                    action="/bookings/cancel/{{ booking['booking_id'] }}"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-danger"
+                                    >
+                                        Cancel
+                                    </button>
+
+                                </form>
+
+                            {% else %}
+
+                                Cancelled
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+                <p>
+                    No bookings found.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
